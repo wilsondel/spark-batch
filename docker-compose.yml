@@ -1,0 +1,23 @@
+services:
+  spark-batch:
+    build: .
+    container_name: spark-batch
+    environment:
+      SPARK_MASTER: local[*]
+      KAFKA_BROKERS: kafka:9092
+      TOPIC_PAYMENT: topic.payment
+      TOPIC_RATING: topic.rating
+      OUTPUT_DIR: /opt/output
+      OUTPUT_FORMAT: json
+      APP_NAME: rides-batch
+    volumes:
+      - ./output:/opt/output
+    # no restart — corre una vez y termina
+    restart: "no"
+    networks:
+      - rides-net
+
+networks:
+  rides-net:
+    external: true
+    name: rides_simulator_default
