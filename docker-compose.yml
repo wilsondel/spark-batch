@@ -4,7 +4,7 @@ services:
     container_name: spark-batch
     environment:
       SPARK_MASTER: local[*]
-      KAFKA_BROKERS: kafka:9092
+      KAFKA_BROKERS: 52.55.121.150:9092
       TOPIC_PAYMENT: topic.payment
       TOPIC_RATING: topic.rating
       OUTPUT_DIR: /opt/output
