@@ -4,20 +4,18 @@ services:
     container_name: spark-batch
     environment:
       SPARK_MASTER: local[*]
-      KAFKA_BROKERS: kafka:9092
+      KAFKA_BROKERS: 54.209.228.100:9092
       TOPIC_PAYMENT: topic.payment
       TOPIC_RATING: topic.rating
       OUTPUT_DIR: /opt/output
       OUTPUT_FORMAT: json
       APP_NAME: rides-batch
+      POSTGRES_HOST: 54.209.228.100
+      POSTGRES_DB: ridesim
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
       - ./output:/opt/output
-    # no restart — corre una vez y termina
+    cap_add:
+      - NET_ADMIN
     restart: "no"
-    networks:
-      - rides-net
-
-networks:
-  rides-net:
-    external: true
-    name: rides_simulator_default

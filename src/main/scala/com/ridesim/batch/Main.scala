@@ -58,6 +58,11 @@ object Main {
     ResultWriter.write(byDriver, cfg.outputDir, "payment_by_driver",   cfg.outputFormat)
     ResultWriter.write(byUser,   cfg.outputDir, "payment_by_user",     cfg.outputFormat)
 
+    ResultWriter.writePg(summary,  cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "payment_summary")
+    ResultWriter.writePg(byMethod, cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "payment_by_method")
+    ResultWriter.writePg(byDriver, cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "payment_by_driver")
+    ResultWriter.writePg(byUser,   cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "payment_by_user")
+
     payments.unpersist()
     log.info("payment_job_completed")
   }
@@ -89,6 +94,11 @@ object Main {
     ResultWriter.write(drivers,  cfg.outputDir, "rating_driver_ranking", cfg.outputFormat)
     ResultWriter.write(users,    cfg.outputDir, "rating_user_ranking",   cfg.outputFormat)
     ResultWriter.write(starDist, cfg.outputDir, "rating_star_dist",      cfg.outputFormat)
+
+    ResultWriter.writePg(summary,  cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "rating_summary")
+    ResultWriter.writePg(drivers,  cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "rating_driver_ranking")
+    ResultWriter.writePg(users,    cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "rating_user_ranking")
+    ResultWriter.writePg(starDist, cfg.pgJdbcUrl, cfg.pgUser, cfg.pgPassword, "rating_star_dist")
 
     ratings.unpersist()
     log.info("rating_job_completed")
